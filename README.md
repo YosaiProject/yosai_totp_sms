@@ -1,4 +1,4 @@
-![totp_logo](/img/smstotp.jpg)
+![totp_logo](/img/sms_totp.jpg)
 
 
 # Yosai SMS Messaging Extension for Time-based One Time Password tokens
