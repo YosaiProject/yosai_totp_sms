@@ -1,7 +1,8 @@
 ![totp_logo](/img/totp.jpg)
 
 
-# Yosai SMS Messaging Extension for Time-based One Time Password tokens
+# Yosai SMS Messaging Extension for 
+# Time-based One Time Password tokens
 
 This is an extension intended for use with Yosai.  It it used during
 two-factor authentication of Time-based One Time Password (TOTP) authentication
