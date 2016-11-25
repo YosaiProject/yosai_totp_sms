@@ -2,19 +2,18 @@ import logging
 from yosai.core import authc_abcs
 from twilio.rest import TwilioRestClient
 
-logger = logging.getLogger(__name__)
 import pdb
+
+logger = logging.getLogger(__name__)
 
 
 class SMSDispatcher(authc_abcs.MFADispatcher):
 
-    def __init__(self, authc_settings):
-        mfa_dispatcher = authc_settings['mfa_dispatcher']
-        self.sms_body = mfa_dispatcher.get('sms_body', 'Authentication Token: ')
-        self.twilio_account_sid = mfa_dispatcher['twilio_account_sid']
-        self.twilio_auth_token = mfa_dispatcher['twilio_auth_token']
-        self.sender_phone_number = mfa_dispatcher['sender_phone_number']
-        pdb.set_trace()
+    def __init__(self, dispatcher_config):
+        self.sms_body = dispatcher_config.get('sms_body', 'Authentication Token: ')
+        self.twilio_account_sid = dispatcher_config['twilio_account_sid']
+        self.twilio_auth_token = dispatcher_config['twilio_auth_token']
+        self.sender_phone_number = dispatcher_config['sender_phone_number']
         if (not self.twilio_account_sid) or (not self.twilio_auth_token):
             msg = ("SMSDispatcher requires twilio_account and twilio_token "
                    "settings be defined.")
@@ -33,7 +32,6 @@ class SMSDispatcher(authc_abcs.MFADispatcher):
                                 sms_body)
 
         if not result.error_code:
-            pdb.set_trace()
             logger.info('AUTHENTICATION.TOTP_SMS_SENT',
                         extra={'sender': self.sender_phone_number,
                                'receiver': mfa_info['phone_number'],
